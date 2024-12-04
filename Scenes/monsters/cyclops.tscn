@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://7l54vxdsenjg"]
+
+[ext_resource type="Script" path="res://Scripts/monsters/cyclops.gd" id="1_5uqdu"]
+[ext_resource type="Texture2D" uid="uid://d0woc8imx4ekw" path="res://Assets/kenney_tiny-dungeon/Tiles/tile_0109.png" id="1_ha6lt"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_vcqkm"]
+radius = 5.0
+height = 16.0
+
+[node name="cyclops" type="CharacterBody2D" groups=["monster"]]
+script = ExtResource("1_5uqdu")
+
+[node name="Tile0109" type="Sprite2D" parent="."]
+texture_filter = 1
+texture = ExtResource("1_ha6lt")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_vcqkm")

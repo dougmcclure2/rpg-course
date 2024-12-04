@@ -1,0 +1,47 @@
+[gd_scene load_steps=7 format=3 uid="uid://o6kufif27j2m"]
+
+[ext_resource type="Script" path="res://Scripts/player/player.gd" id="1_il744"]
+[ext_resource type="Texture2D" uid="uid://csl6gxu6iu0i1" path="res://Assets/kenney_tiny-dungeon/Tiles/tile_0085.png" id="1_mdyxc"]
+[ext_resource type="Texture2D" uid="uid://dwgiknhalj5pm" path="res://Assets/kenney_tiny-dungeon/Tiles/tile_0104.png" id="3_n6vtj"]
+[ext_resource type="Texture2D" uid="uid://cymvme8dqaqcl" path="res://Assets/kenney_tiny-town/Tiles/tile_0118.png" id="4_jkx4d"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_4hl5g"]
+radius = 6.0
+height = 16.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_28hkj"]
+size = Vector2(16, 6)
+
+[node name="Player" type="CharacterBody2D" groups=["player"]]
+texture_filter = 1
+script = ExtResource("1_il744")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_4hl5g")
+
+[node name="Tile0085" type="Sprite2D" parent="."]
+texture = ExtResource("1_mdyxc")
+
+[node name="weapon" type="Marker2D" parent="."]
+
+[node name="melee" type="Area2D" parent="weapon"]
+
+[node name="Tile0104" type="Sprite2D" parent="weapon/melee"]
+position = Vector2(17, 0)
+rotation = 1.5708
+texture = ExtResource("3_n6vtj")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="weapon/melee"]
+position = Vector2(17, 0)
+shape = SubResource("RectangleShape2D_28hkj")
+
+[node name="ranged" type="Marker2D" parent="weapon"]
+
+[node name="Tile0118" type="Sprite2D" parent="weapon/ranged"]
+position = Vector2(13, 1)
+texture = ExtResource("4_jkx4d")
+
+[node name="Timer" type="Timer" parent="weapon/ranged"]
+
+[connection signal="body_entered" from="weapon/melee" to="." method="_on_melee_body_entered"]
+[connection signal="timeout" from="weapon/ranged/Timer" to="." method="_on_timer_timeout"]
